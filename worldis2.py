@@ -1,3 +1,6 @@
+# experimental optimizer func:
+#optimizer = keras.optimizers.SGD(learning_rate=0.1, nesterov=True)
+
 from makedataset import dataset
 import pandas as pd
 import numpy as np
@@ -26,7 +29,7 @@ model = keras.Sequential([
     keras.layers.Dense(3, activation="softmax")
     ])
 
-#optimizer = keras.optimizers.SGD(learning_rate=0.1, nesterov=True)
+
 model.compile(
     optimizer= 'adam', 
         loss="categorical_crossentropy", 
