@@ -13,3 +13,18 @@ The following is the info used in our model:
 
 Output: CONT_DATE, CONT_DOY, FIRE_SIZE, FIRESIZECLASS
 Input: DISCOVERY_DOY, STAT_CAUSE_CODE, LATITUDE, LONGITUDE
+
+STAT_CAUSE_CODE 
+1 - Lightning
+2 - Equipment Use
+3 - Smoking
+4 - Campfire
+5 - Debris Burning
+6 - Railroad
+7 - Arson
+8 - Children
+9 - Misc/other
+10 - Fireworks
+11 - Power Line
+12 - Structure
+13 - Missing or undefined  N/A
