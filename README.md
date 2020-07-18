@@ -9,6 +9,5 @@ The following is the info used in our model:
 9. FIRES - FIRE_SIZE size of the fire in acres
 10. FIRES - FIRE_SIZE_CLASS is the class of fire size. Make sure this is similar to FIRE_SIZE, and if not, average the two for more accuracy.
 11. FIRES - LATITUDE/LONGITUDE (JUST TRY THIS, MIGHT NOT BE REGRESSION FRIENDLY)
-12. FIRES - STATE BE CAREFUL WITH THE DIFFERENT STATES. 
 
 Output: CONT_DATE, CONT_DOY, FIRE_SIZE, FIRESIZECLASS
