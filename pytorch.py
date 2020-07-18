@@ -58,22 +58,24 @@ def test(model, device, test_loader):
             output = output.type(torch.float)
             target = target.type(torch.long)
             criterion = torch.nn.CrossEntropyLoss()
-            test_loss = criterion(output, torch.max(target, 1)[1]).item()
+            test_loss = criterion(output, torch.max(target, 1)[0]).item()
+            output = output.reshape((-1, 1))
+            target = target.reshape((-1, 1))
             pred = output.argmax(dim=1, keepdim=True)
-            correct += torch.sum(pred==target.data)
+            correct += pred.eq(target.view_as(pred)).sum().item()/3
 
     test_loss /= len(test_loader.dataset)
 
     print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
         test_loss, correct, len(test_loader.dataset),
-        100. * correct / len(test_loader.dataset)))
+        100. * correct / (len(test_loader.dataset))))
 
 
 def main():
     parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
     parser.add_argument('--batch-size', type=int, default=2048, metavar='N',
                         help='input batch size for training (default: 64)')
-    parser.add_argument('--test-batch-size', type=int, default= 3000, metavar='N',
+    parser.add_argument('--test-batch-size', type=int, default= 2191, metavar='N',
                         help='input batch size for testing (default: 1000)')
     parser.add_argument('--epochs', type=int, default=14, metavar='N',
                         help='number of epochs to train (default: 14)')
@@ -112,7 +114,7 @@ def main():
     train1 = torch.utils.data.TensorDataset(train1, trainLabels)
     verification = torch.utils.data.TensorDataset(ver, verLabels)
     train_loader = torch.utils.data.DataLoader(train1, batch_size = 2048, shuffle = True, num_workers = 4)
-    test_loader = torch.utils.data.DataLoader(verification, batch_size = 3000, shuffle = True, num_workers = 4)
+    test_loader = torch.utils.data.DataLoader(verification, batch_size = 2191, shuffle = True, num_workers = 4)
     model = Net().to(device)
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
 

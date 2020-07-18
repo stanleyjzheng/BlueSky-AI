@@ -32,3 +32,7 @@ model.compile(
 )
 
 model.fit(train, trainLabels, batch_size = 2048, epochs = 100, validation_data = (ver, verLabels))
+
+
+
+
