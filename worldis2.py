@@ -31,7 +31,7 @@ model.compile(
         metrics=["accuracy"]
 )
 
-model.fit(train, trainLabels, batch_size = 2048, epochs = 10, validation_data = (ver, verLabels))
+model.fit(train, trainLabels, batch_size = 2048, epochs = 5, validation_data = (ver, verLabels))
 
 
 
