@@ -21,7 +21,7 @@ print(ver.shape)
 model = keras.Sequential([
     keras.layers.Flatten(input_shape=(1, 4)),
     keras.layers.Dense(14, activation="relu"),
-	keras.layers.Dense(6, activation='relu'),
+    keras.layers.Dense(6, activation='relu'),
     keras.layers.BatchNormalization(),
     keras.layers.Dense(3, activation="softmax")
     ])
