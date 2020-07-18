@@ -5,39 +5,50 @@ from makedataset import dataset
 import pandas as pd
 import numpy as np
 import datetime
+from flask import Flask
 
-def toint(date, STAT_CAUSE_DISC, LATITUDE, LONGITUDE):
+app = Flask(__name__)
+
+@app.route('/model')
+def main(date, STAT_CAUSE_DISC, LATITUDE, LONGITUDE):
+    DISCOVERY_DOY, STAT_CAUSE_CODE = toint(date, STAT_CAUSE_DISC)
+    acreage, contDate = predictModel(DISCOVERY_DOY, STAT_CAUSE_CODE, LATITUDE, LONGITUDE)
+    return {'acerage': acerage, 'contDate': contDate}
+    #Please note this is 2 
+
+def toint(date, STAT_CAUSE_DISC):
     fmt = '%Y.%m.%d'
-    s = '1111.'+'date'#Date should be mm.dd. We could also do mm/dd
+    s = '1111.'+str(date)#Date should be mm.dd. We could also do mm/dd
     dt = datetime.datetime.strptime(s, fmt)
     tt = dt.timetuple()
     tt = tt.tm_yday
-    if lower(STAT_CAUSE_DISC)=='lightning':
+    if STAT_CAUSE_DISC.lower()=='lightning':
         STAT_CAUSE_CODE = 1
-    if lower(STAT_CAUSE_DISC)=='equipment use':
+    if STAT_CAUSE_DISC.lower()=='equipment use':
         STAT_CAUSE_CODE = 2
-    if lower(STAT_CAUSE_DISC)=='smoking':
+    if STAT_CAUSE_DISC.lower()=='smoking':
         STAT_CAUSE_CODE = 3
-    if lower(STAT_CAUSE_DISC)=='campfire':
+    if STAT_CAUSE_DISC.lower()=='campfire':
         STAT_CAUSE_CODE = 4
-    if lower(STAT_CAUSE_DISC)=='debris burning':
+    if STAT_CAUSE_DISC.lower()=='debris burning':
         STAT_CAUSE_CODE = 5
-    if lower(STAT_CAUSE_DISC)=='railroad':
+    if STAT_CAUSE_DISC.lower()=='railroad':
         STAT_CAUSE_CODE = 6
-    if lower(STAT_CAUSE_DISC)=='arson':
+    if STAT_CAUSE_DISC.lower()=='arson':
         STAT_CAUSE_CODE = 7
-    if lower(STAT_CAUSE_DISC)=='children':
+    if STAT_CAUSE_DISC.lower()=='children':
         STAT_CAUSE_CODE = 8
-    if lower(STAT_CAUSE_DISC)=='misc/other':
+    if STAT_CAUSE_DISC.lower()=='misc/other':
         STAT_CAUSE_CODE = 9
-    if lower(STAT_CAUSE_DISC)=='fireworks':
+    if STAT_CAUSE_DISC.lower()=='fireworks':
         STAT_CAUSE_CODE = 10
-    if lower(STAT_CAUSE_DISC)=='power line':
+    if STAT_CAUSE_DISC.lower()=='power line':
         STAT_CAUSE_CODE = 11
-    if lower(STAT_CAUSE_DISC)=='structure':
+    if STAT_CAUSE_DISC.lower()=='structure':
         STAT_CAUSE_CODE = 12
-    if lower(STAT_CAUSE_DISC)=='missing':
+    if STAT_CAUSE_DISC.lower()=='missing':
         STAT_CAUSE_CODE = 13
+    return date, STAT_CAUSE_CODE
 
 def predictModel(DISCOVERY_DOY, STAT_CAUSE_CODE, LATITUDE, LONGITUDE):
     model = keras.models.load_model('saves/saved_model')
@@ -86,4 +97,9 @@ def predictModel(DISCOVERY_DOY, STAT_CAUSE_CODE, LATITUDE, LONGITUDE):
     elif fireSize<fireSizeVerBottom*0.75:
         fireSizeAvg = (fireSizeVerTop+fireSizeVerBottom)/2
         fireSize = (fireSizeAvg+fireSize)/2
-    return int(abs(fireSize)), int(abs(containDiff))
+    regularday = datetime.datetime.strptime('2005 '+ str(int(containDiff)), '%Y %j')
+    regularday = regularday.strftime('%Y/%m/%d')
+    regularday = str(regularday)[5:10]
+    return int(abs(fireSize)), regularday
+
+print(main(04.04, 'lightning', 40.656564, -113.675837))

@@ -24,21 +24,25 @@ class Net(nn.Module):
         x = F.relu(x)
         x = self.dense2(x)
         #x = self.dense3(x)
-        output = F.log_softmax(x, dim=1)
+        #output = F.log_softmax(x, dim=1)
+        #x = x.clamp(0, 1)
+
+        output = F.sigmoid(x)
+
         return output
 
 def train(args, model, device, train_loader, optimizer, epoch):
-    model.train()
     for batch_idx, (data, target) in enumerate(train_loader):
-        data, target = data.to(device), target.to(device)
-        optimizer.zero_grad()
-        output = model(data)
-        output = output.type(torch.float)
-        target = target.type(torch.long)
-        criterion = torch.nn.CrossEntropyLoss()
-        loss = criterion(output, torch.max(target, 1)[1])
-        loss.backward()
-        optimizer.step()
+        with torch.set_grad_enabled(True):
+            data, target = data.to(device), target.to(device)
+            optimizer.zero_grad()
+            output = model(data)
+            output = output.type(torch.float)
+            target = target.type(torch.long)
+            criterion = torch.nn.CrossEntropyLoss()
+            loss = criterion(output, torch.max(target, 1)[1])
+            loss.backward()
+            optimizer.step()
         if batch_idx % args.log_interval == 0:
             print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                 epoch, batch_idx * len(data), len(train_loader.dataset),
@@ -46,11 +50,10 @@ def train(args, model, device, train_loader, optimizer, epoch):
             if args.dry_run:
                 break
 
-
 def test(model, device, test_loader):
     model.eval()
     test_loss = 0
-    correct = 0
+    cost=0
     with torch.no_grad():
         for data, target in test_loader:
             data, target = data.to(device), target.to(device)
@@ -58,28 +61,24 @@ def test(model, device, test_loader):
             output = output.type(torch.float)
             target = target.type(torch.long)
             criterion = torch.nn.CrossEntropyLoss()
-            test_loss = criterion(output, torch.max(target, 1)[0]).item()
-            output = output.reshape((-1, 1))
-            target = target.reshape((-1, 1))
-            pred = output.argmax(dim=1, keepdim=True)
-            correct += pred.eq(target.view_as(pred)).sum().item()/3
+            test_loss = criterion(output, torch.max(target, 1)[1]).item()
+            cost += abs(target-output)
+        diff = torch.sum(cost)
+    print(len(test_loader.dataset))
+    diff /= len(test_loader.dataset)
+    test_loss /= 48
 
-    test_loss /= len(test_loader.dataset)
-
-    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
-        test_loss, correct, len(test_loader.dataset),
-        100. * correct / (len(test_loader.dataset))))
-
+    print('\nTest set: Average loss: ' + str(test_loss) + ' Cost:' + str(diff.item()))
 
 def main():
-    parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
+    parser = argparse.ArgumentParser(description='Forestfire-AI')
     parser.add_argument('--batch-size', type=int, default=2048, metavar='N',
                         help='input batch size for training (default: 64)')
     parser.add_argument('--test-batch-size', type=int, default= 2191, metavar='N',
                         help='input batch size for testing (default: 1000)')
-    parser.add_argument('--epochs', type=int, default=14, metavar='N',
+    parser.add_argument('--epochs', type=int, default=40, metavar='N',
                         help='number of epochs to train (default: 14)')
-    parser.add_argument('--lr', type=float, default=1.0, metavar='LR',
+    parser.add_argument('--lr', type=float, default=0.5, metavar='LR',
                         help='learning rate (default: 1.0)')
     parser.add_argument('--gamma', type=float, default=0.7, metavar='M',
                         help='Learning rate step gamma (default: 0.7)')
@@ -89,7 +88,7 @@ def main():
                         help='quickly check a single pass')
     parser.add_argument('--seed', type=int, default=1, metavar='S',
                         help='random seed (default: 1)')
-    parser.add_argument('--log-interval', type=int, default=10, metavar='N',
+    parser.add_argument('--log-interval', type=int, default=40, metavar='N',
                         help='how many batches to wait before logging training status')
     parser.add_argument('--save-model', action='store_true', default=False,
                         help='For Saving the current Model')
@@ -105,7 +104,7 @@ def main():
         kwargs.update({'num_workers': 1,
                        'pin_memory': True,
                        'shuffle': True},
-                     )
+                      )
     batchSize=2048 
     train1, trainLabels, ver, verLabels = dataset()
     train1, trainLabels, ver, verLabels = torch.from_numpy(np.array(train1).astype(np.float32)), torch.from_numpy(np.array(trainLabels).astype(np.float32)), torch.from_numpy(np.array(ver).astype(np.float32)), torch.from_numpy(np.array(verLabels).astype(np.float32))
@@ -124,8 +123,7 @@ def main():
         test(model, device, test_loader)
         scheduler.step()
 
-    if args.save_model:
-        torch.save(model.state_dict(), "mnist_cnn.pt")
+    torch.save(model, "forestfire-aiwork.pt")
 
 if __name__ == '__main__':
     main()
