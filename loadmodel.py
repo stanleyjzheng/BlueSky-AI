@@ -5,15 +5,10 @@ from makedataset import dataset
 import pandas as pd
 import numpy as np
 import datetime
-from flask import Flask
 
-app = Flask(__name__)
-
-@app.route('/model')
 def main(date, STAT_CAUSE_DISC, LATITUDE, LONGITUDE):
     DISCOVERY_DOY, STAT_CAUSE_CODE = toint(date, STAT_CAUSE_DISC)
-    acreage, contDate = predictModel(DISCOVERY_DOY, STAT_CAUSE_CODE, LATITUDE, LONGITUDE)
-    return {'acerage': acerage, 'contDate': contDate}
+    return predictModel(DISCOVERY_DOY, STAT_CAUSE_CODE, LATITUDE, LONGITUDE) 
     #Please note this is 2 
 
 def toint(date, STAT_CAUSE_DISC):
