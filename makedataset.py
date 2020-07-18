@@ -7,8 +7,8 @@ def importSQL():
 	workingDirectory = os.path.dirname(os.path.realpath(__file__))
 	print(os.path.sep.join([f'{workingDirectory}', 'input', 'FPA_FOD_20170508.sqlite']))
 	conn = sqlite3.connect(os.path.sep.join([f'{workingDirectory}', 'input', 'FPA_FOD_20170508.sqlite']))
-	df = pd.read_sql_query("SELECT DISCOVERY_DOY,CONT_DOY,FIRE_SIZE,LATITUDE,LONGITUDE,STATE FROM Fires", con = conn)
-	print(df.head())
+	df = pd.read_sql_query("SELECT STAT_CAUSE_CODE,DISCOVERY_DOY,CONT_DOY,FIRE_SIZE,FIRE_SIZE_CLASS,LATITUDE,LONGITUDE,STATE FROM Fires", con = conn)
+	#print(df.head())
 	print
 	return df
 
@@ -23,4 +23,13 @@ def makeTest(df):
 
 def dataset():
 	train, ver = makeTest(importSQL())
-	return train, ver
+	trainLabels = train[['CONT_DOY', 'FIRE_SIZE', 'FIRE_SIZE_CLASS']]
+	train = train[['DISCOVERY_DOY', 'STAT_CAUSE_CODE', 'LATITUDE', 'LONGITUDE', 'STATE']]
+	verLabels = ver[['CONT_DOY', 'FIRE_SIZE', 'FIRE_SIZE_CLASS']]
+	ver = ver[['DISCOVERY_DOY', 'STAT_CAUSE_CODE', 'LATITUDE', 'LONGITUDE', 'STATE']]
+	return train, trainLabels, verLabels, ver
+# train, trainLabels, verLabels, ver = dataset()
+# print(train.shape)
+# print(trainLabels.shape)
+# print(verLabels.shape)
+# print(ver.shape)
