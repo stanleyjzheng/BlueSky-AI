@@ -24,7 +24,3 @@ def makeTest(df):
 def dataset():
 	train, ver = makeTest(importSQL())
 	return train, ver
-
-train, ver = dataset()
-print(train.shape)
-print(ver.shape)
