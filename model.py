@@ -8,8 +8,7 @@ from torch import Tensor
 import torch
 import numpy
 
-train, ver = dataset()
-
+train, trainLabels, verLabels, ver = dataset()
 
 
 def processDF():
@@ -74,7 +73,6 @@ def set_parameter_requires_grad(model, feature_extracting):
             param.requires_grad = False
 
 model, input_size = initialize_model(modelName, numClasses, feature_extract, use_pretrained=True)
-images, labels, verImg, verLabels = processImages(workingDirectory = workingDirectory)
 
 train = torch.utils.data.TensorDataset(images, labels)
 verification = torch.utils.data.TensorDataset(verImg, verLabels)

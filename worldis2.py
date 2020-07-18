@@ -7,18 +7,30 @@ import torch.nn.functional as F
 from torch import Tensor
 import torch
 import numpy
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import metrics
 
 train, trainLabels, verLabels, ver = dataset()
 
-print(trainLabels.head)
-print(train.head)
-print(ver.head)
-print(verLabels.head)
-
-DISCOVERY_DOY = trainLabels['CONT_DOY']
-print(DISCOVERY_DOY)
-
-print(trainLabels.shape)
 print(train.shape)
+print(trainLabels.shape)
 print(verLabels.shape)
 print(ver.shape)
+
+model = keras.Sequential([
+    keras.layers.Flatten(input_shape=(1, 4)),
+    keras.layers.Dense(14, activation="relu"),
+	keras.layers.Dense(6, activation='relu'),
+    keras.layers.BatchNormalization(),
+    keras.layers.Dense(3, activation="softmax")
+    ])
+
+#optimizer = keras.optimizers.SGD(learning_rate=0.1, nesterov=True)
+model.compile(
+    optimizer= 'adam', 
+        loss="categorical_crossentropy", 
+        metrics=["accuracy"]
+)
+
+model.fit(train, trainLabels, batch_size = 2048, epochs = 100, validation_data = (ver, verLabels))
