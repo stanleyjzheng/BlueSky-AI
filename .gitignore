@@ -1,2 +1,4 @@
 **/.vscode
 **/input
+makever.py
+**/__pycache__

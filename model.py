@@ -1,3 +1,9 @@
-from importsql import importSQL
+from makedataset import dataset
+import pandas
+import torch
+import numpy
+#import 
 
-importSQL()
+train, ver = dataset()
+print(train.shape)
+print(test.shape)
