@@ -1,18 +1,32 @@
+
 from makedataset import dataset
+import pandas as pd
+import numpy as np
+from collections import namedtuple
+import torch.nn as nn
+import torch.nn.functional as F
+from torch import Tensor
+import torch
+import numpy
 import tensorflow as tf
 from tensorflow import keras
+from tensorflow.keras import metrics
 
-train, trainLabels, verLabels, ver = dataset()
+train, trainLabels, ver, verLabels = dataset()
 
-#maxFireSize=trainLabels['FIRE_SIZE']
+model = keras.Sequential([
+    keras.layers.Flatten(input_shape=(1, 4)),
+    keras.layers.Dense(14, activation="relu"),
+	keras.layers.Dense(9, activation='relu'),
+    keras.layers.BatchNormalization(),
+    keras.layers.Dense(3, activation="softmax")
+    ])
 
-print(ver.head)
-#(20, -50) becomes (0, 0)
-#(75, -170) becomes (55, 120)
-print(max(ver))
-# print(max(ver.iloc[:, 0]))
-# print(max(ver.iloc[:, 1]))
-print(max(ver.iloc[:, 2]))
-print(max(ver.iloc[:, 3]))
-print(min(ver.iloc[:, 2]))
-print(min(ver.iloc[:, 3]))
+#optimizer = keras.optimizers.SGD(learning_rate=0.1, nesterov=True)
+model.compile(
+    optimizer= 'adam', 
+        loss="categorical_crossentropy", 
+        metrics=["accuracy"]
+)
+
+model.fit(train, trainLabels, batch_size = 2048, epochs = 100, validation_data = (ver, verLabels))

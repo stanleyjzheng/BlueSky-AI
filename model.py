@@ -18,7 +18,6 @@ DISCOVERY_DOY = pd.DataFrame(data,columns=['DISCOVERY_DOY','Age'])
 
 
 
-
 def train_model(model, dataloaders, criterion, optimizer, epochs=25, is_inception=False):
     val_acc_history = []
     best_model_wts = copy.deepcopy(model.state_dict())

@@ -47,7 +47,7 @@ def dataset():
 	ver.iloc[:, 2] = ver.iloc[:, 2].astype(float).divide(53)
 	ver.iloc[:, 3] = [abs(x)-52 for x in ver.iloc[:, 3]]
 	ver.iloc[:, 3] = ver.iloc[:, 3].astype(float).divide(116)
-	return train, trainLabels, verLabels, ver
+	return train, trainLabels, ver, verLabels
 # train, trainLabels, verLabels, ver = dataset()	
 # print(train.shape)
 # print(trainLabels.shape)
