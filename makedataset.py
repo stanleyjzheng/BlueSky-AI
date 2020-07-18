@@ -2,7 +2,6 @@ import pandas as pd
 import os
 import sqlite3
 
-
 def importSQL():
 	workingDirectory = os.path.dirname(os.path.realpath(__file__))
 	print(os.path.sep.join([f'{workingDirectory}', 'input', 'FPA_FOD_20170508.sqlite']))
@@ -23,6 +22,7 @@ def makeTest(df):
 
 def dataset():
 	train, ver = makeTest(importSQL())
+	train, ver = train.dropna(), ver.dropna()
 	trainLabels = train[['CONT_DOY', 'FIRE_SIZE', 'FIRE_SIZE_CLASS']]
 	train = train[['DISCOVERY_DOY', 'STAT_CAUSE_CODE', 'LATITUDE', 'LONGITUDE', 'STATE']]
 	verLabels = ver[['CONT_DOY', 'FIRE_SIZE', 'FIRE_SIZE_CLASS']]
