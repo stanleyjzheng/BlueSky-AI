@@ -1,6 +1,6 @@
 # experimental optimizer func:
 #optimizer = keras.optimizers.SGD(learning_rate=0.1, nesterov=True)
-
+#optimizer = keras.optimizers.Aadam(learning_rate=0.05)
 from makedataset import dataset
 import pandas as pd
 import numpy as np
@@ -15,11 +15,6 @@ from tensorflow import keras
 from tensorflow.keras import metrics
 
 train, trainLabels, verLabels, ver = dataset()
-
-print(train.shape)
-print(trainLabels.shape)
-print(verLabels.shape)
-print(ver.shape)
 
 model = keras.Sequential([
     keras.layers.Flatten(input_shape=(1, 4)),
