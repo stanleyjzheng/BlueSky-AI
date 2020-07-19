@@ -1,13 +1,13 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [currentTime, setCurrentTime] = useState('00:00:00');
+  const [acreage, setAcreage] = useState('0');
   const [currentDate, setCurrentDate] = useState('1/1/2020');
   
-  window.setInterval(() => {
-    fetch('/time').then(res => res.json()).then(data => {
+  /*window.setInterval(() => {
+    /*fetch('/model').then(res => res.json()).then(data => {
       let timestamp = data.time;
       var date = new Date(timestamp * 1000);
       var hours = date.getHours();
@@ -23,12 +23,27 @@ function App() {
       setCurrentDate(today);
     });
   }, 1000);
+  fetch('/model', {
+    method: "POST",
+    body: {'date': '09.02', 'stat': 'Children', 'latitude':'40.656564', 'longitude':'-113.675837'}
+  }).then(res => res.json()).then(data => {
+    console.log('Data', data);
+    setCurrentDate(data.contDate);
+    setAcreage(data.acreage);
+  })*/
+  fetch('/test', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({'name': 'value'}),
+    }).then(res => res.json()).then(res => console.log(res));
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo"/>
         <h1>{currentDate}</h1>
-	      <h3>{currentTime}</h3>
+        <h3>{acreage}</h3>
       </header>
     </div>
   );

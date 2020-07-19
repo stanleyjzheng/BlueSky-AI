@@ -1,2 +1,2 @@
-FLASK_APP=api.py
+FLASK_APP=modelinterface.py
 FLASK_ENV=development

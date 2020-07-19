@@ -1,19 +1,37 @@
+from __future__ import print_function
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import metrics
-from makedataset import dataset
-import pandas as pd
 import numpy as np
 import datetime
-from flask import Flask
+from flask import Flask, jsonify, request, Response, make_response
 
 app = Flask(__name__)
 
-@app.route('/model')
-def main(date, STAT_CAUSE_DISC, LATITUDE, LONGITUDE):
-    DISCOVERY_DOY, STAT_CAUSE_CODE = toint(date, STAT_CAUSE_DISC)
-    acreage, contDate = predictModel(DISCOVERY_DOY, STAT_CAUSE_CODE, LATITUDE, LONGITUDE)
-    return {'acreage': acreage, 'contDate': contDate} #acreage in acres, contDate in mmdd
+@app.route('/test', methods=['POST', 'GET'])
+def test():
+    if request.method == 'POST':
+        print('post app')
+        req = request.json
+        print(req)
+        return jsonify(name='john')    
+
+#@app.route('/model', methods=['GET', 'POST'])
+def main():
+    req = request.get_json(force=True)    
+    date = request["date"]
+    #STAT_CAUSE_DISC = request["stat"]
+    #LATITUDE = request["latitude"]
+    #LONGITUDE = request["long"]
+    # print(req+'this is to see if print works')
+    # date = req.date
+    # STAT_CAUSE_DISC = req.stat
+    # LATITUDE = req.latitude
+    # LONGITUDE = req.long
+    #DISCOVERY_DOY, STAT_CAUSE_CODE = toint(date, STAT_CAUSE_DISC)
+    #acreage, contDate = predictModel(DISCOVERY_DOY, STAT_CAUSE_CODE, LATITUDE, LONGITUDE)
+    out = make_response(jsonify({'acreage': 10, 'contDate': '5/6'}), 200)
+    return (out)
 
 def toint(date, STAT_CAUSE_DISC):
     fmt = '%Y.%m.%d'
@@ -100,5 +118,3 @@ def predictModel(DISCOVERY_DOY, STAT_CAUSE_CODE, LATITUDE, LONGITUDE):
     regularday = regularday.strftime('%Y/%m/%d')
     regularday = str(regularday)[5:10]
     return int(abs(fireSize)), regularday
-
-print(main(04.04, 'lightning', 40.656564, -113.675837))
