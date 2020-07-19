@@ -23,3 +23,5 @@ __pycache__
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+Wildfire-AI/react-flask-app/api/makedataset.py
