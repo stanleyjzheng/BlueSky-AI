@@ -150,7 +150,7 @@ function toint(STAT_CAUSE_DISC) {
 }
 
 async function predictModel (DISCOVERY_DOY, STAT_CAUSE_CODE, LATITUDE, LONGITUDE, year){
-  let model = await tf.loadGraphModel("http://localhost:3000/saves/model.json").catch(err => console.log(err))//https://drive.google.com/uc?export=download&id=1SLh4UDSRMH8YXdFd_nWaqKwCc0AlNajX
+  let model = await tf.loadGraphModel("https://stanley-zheng.github.io/BlueSky-AI/saves/model.json").catch(err => console.log(err))//https://drive.google.com/uc?export=download&id=1SLh4UDSRMH8YXdFd_nWaqKwCc0AlNajX
   DISCOVERY_DOY = DISCOVERY_DOY/366
   STAT_CAUSE_CODE= STAT_CAUSE_CODE/13
   LATITUDE = (Math.abs(LATITUDE)-25)/48
