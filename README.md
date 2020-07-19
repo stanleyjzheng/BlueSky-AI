@@ -1,4 +1,6 @@
-# Wildfire-AI
+![BlueSky-AI Logo](https://media.discordapp.net/attachments/733836130277130263/734503177566552114/unknown.png)
+
+# BlueSky-AI
 
 The following is the info used in our model:
 1. FIRES - FOD_ID as a unique identifier to sort into test and train

@@ -1,0 +1,68 @@
+.App {
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#mainHeader{
+  font-size: 50px;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin: auto;
+  background-color: whitesmoke;
+}
+
+#submitButton{
+  width: 200px;
+  margin: auto;
+}
+
+.label{
+  float: left;
+  margin-left: 20px;
+  margin-bottom: 50px;
+  font-size: 24px;
+}
+
+.input{
+  float: right;
+  margin-right: 20px;
+  font-size: 18px;
+}
+
+#date{
+  background-color: yellow;
+}
+
+
+#causeList{
+  width: 300px;
+  float: right;
+  margin-right: 20px;
+}
+
+#lat, #long{
+  font-size: 20px;
+}
+
+.locInput{
+  font-size: 18px;
+  margin-top: 6px;
+  padding: 2px;
+}
