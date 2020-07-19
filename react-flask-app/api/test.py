@@ -4,40 +4,16 @@ from tensorflow import keras
 from tensorflow.keras import metrics
 import numpy as np
 import datetime
-from flask import Flask, jsonify, request, Response, make_response
 
-app = Flask(__name__)
-
-@app.route('/test', methods=['POST', 'GET'])
 def test():
-    if request.method == 'POST':
-        print('post app')
-        req = request.json
-        date = req['date']
-        DISCOVERY_DOY, STAT_CAUSE_CODE = toint('09.11', str(req['stat']))
-        acreage, contDate = predictModel(float(DISCOVERY_DOY), STAT_CAUSE_CODE, float(req['latitude']), float(req['longitude']))
-        #DISCOVERY_DOY, STAT_CAUSE_CODE = toint('09.11', 'Children')
-        #acreage, contDate = predictModel(DISCOVERY_DOY, STAT_CAUSE_CODE, 40.656564, -113.675837)
-        #return jsonify({"acreage":acreage, "contDate": contDate})
+    print('post app')
+    DISCOVERY_DOY, STAT_CAUSE_CODE = toint('09.11', 'Children')
+    acreage, contDate = predictModel(DISCOVERY_DOY, STAT_CAUSE_CODE, 40.656564, -113.675837)
+    #return jsonify({"acreage":acreage, "contDate": contDate})
     #return jsonify(something = str(DISCOVERY_DOY), somethingelse = str(STAT_CAUSE_CODE))
-    return jsonify(acreage=acreage, contDate=contDate)
-
-#@app.route('/model', methods=['POST', 'GET'])
-def main():
-    req = request.get_json(force=True)    
-    date = request["date"]
-    #STAT_CAUSE_DISC = request["stat"]
-    #LATITUDE = request["latitude"]
-    #LONGITUDE = request["long"]
-    # print(req+'this is to see if print works')
-    # date = req.date
-    # STAT_CAUSE_DISC = req.stat
-    # LATITUDE = req.latitude
-    # LONGITUDE = req.long
-    #DISCOVERY_DOY, STAT_CAUSE_CODE = toint(date, STAT_CAUSE_DISC)
-    #acreage, contDate = predictModel(DISCOVERY_DOY, STAT_CAUSE_CODE, LATITUDE, LONGITUDE)
-    out = make_response(jsonify({'acreage': 10, 'contDate': '5/6'}), 200)
-    return (out)
+    out = {'acreage':str(acreage), 'contDate':str(contDate)}
+    print(out)
+    return out
 
 def toint(date, STAT_CAUSE_DISC):
     fmt = '%Y.%m.%d'
@@ -127,3 +103,5 @@ def predictModel(DISCOVERY_DOY, STAT_CAUSE_CODE, LATITUDE, LONGITUDE):
     regularday = regularday.strftime('%Y/%m/%d')
     regularday = str(regularday)[5:10]
     return int(abs(fireSize)), regularday
+
+test()

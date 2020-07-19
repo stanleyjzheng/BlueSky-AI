@@ -36,8 +36,12 @@ function App() {
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify({'name': 'value'}),
-    }).then(res => res.json()).then(res => console.log(res));
+      body: JSON.stringify({'date': '09.02', 'stat': 'Children', 'latitude':'40.656564', 'longitude':'-113.675837'}),
+    }).then(res => res.json()).then(
+      (res) =>{ 
+        setCurrentDate(res.contDate);
+        setAcreage(res.acreage);
+      });
   return (
     <div className="App">
       <header className="App-header">

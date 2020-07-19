@@ -43,7 +43,7 @@ def toint(date, STAT_CAUSE_DISC):
         STAT_CAUSE_CODE = 12
     if STAT_CAUSE_DISC.lower()=='missing':
         STAT_CAUSE_CODE = 13
-    return date, STAT_CAUSE_CODE
+    return tt, STAT_CAUSE_CODE
 
 def predictModel(DISCOVERY_DOY, STAT_CAUSE_CODE, LATITUDE, LONGITUDE):
     model = keras.models.load_model('saves/saved_model')
