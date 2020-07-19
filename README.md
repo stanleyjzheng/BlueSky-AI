@@ -45,8 +45,3 @@ Using Panda's and SQLite3, we parsed the SQLITE file the dataset was packaged in
 ## Challenges I ran into
 None of our team members have used SQL, but the dataset was a SQLITE file. We had some trouble parsing it until we started using Panda's. 
 
-## Accomplishments that I'm proud of
-
-## What I learned
-
-## What's next for Wildfire-AI
