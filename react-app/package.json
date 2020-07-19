@@ -1,4 +1,16 @@
 {
+  "scripts": {
+    "xdn": "xdn",
+    "xdn:start": "xdn run",
+    "xdn:build": "xdn build",
+    "xdn:deploy": "xdn deploy",
+    "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "name": "react-app",
   "version": "0.1.1",
   "private": true,
@@ -9,6 +21,9 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@xdn/cli": "^1.41.2",
+    "@xdn/core": "^1.41.2",
+    "@xdn/prefetch": "^1.41.2",
     "google-maps-react": "^2.0.6",
     "react": "^16.13.1",
     "react-date-picker": "^8.0.1",
@@ -18,14 +33,6 @@
     "react-select": "^3.1.0",
     "react-spinkit": "^3.0.0",
     "react-spinners": "^0.9.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
