@@ -88,13 +88,13 @@ def predictModel(DISCOVERY_DOY, STAT_CAUSE_CODE, LATITUDE, LONGITUDE):
         fireSizeVerTop=4999.99
     elif fireSize==7:
         fireSizeVerBottom=5000
-        fireSizeVerTop=500000
+        fireSizeVerTop=300000
     else:
         fireSizeVerTop=5000000000
         fireSizeVerBottom=0.01
         print(fireSizeClass)
     if fireSize>fireSizeVerTop:
-        fireSizeAvg = (fireSizeVerTop+fireSizeVerBottom)/2
+        fireSizeAvg = fireSizeVerBottom
         fireSize = (fireSizeAvg+fireSize)/2
     elif fireSize<fireSizeVerBottom*0.75:
         fireSizeAvg = (fireSizeVerTop+fireSizeVerBottom)/2

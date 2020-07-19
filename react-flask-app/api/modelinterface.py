@@ -50,27 +50,27 @@ def toint(date, STAT_CAUSE_DISC):
         STAT_CAUSE_CODE = 1
     if STAT_CAUSE_DISC.lower()=='equipment use':
         STAT_CAUSE_CODE = 2
-    if STAT_CAUSE_DISC.lower()=='smoking':
+    elif STAT_CAUSE_DISC.lower()=='smoking':
         STAT_CAUSE_CODE = 3
-    if STAT_CAUSE_DISC.lower()=='campfire':
+    elif STAT_CAUSE_DISC.lower()=='campfire':
         STAT_CAUSE_CODE = 4
-    if STAT_CAUSE_DISC.lower()=='debris burning':
+    elif STAT_CAUSE_DISC.lower()=='debris burning':
         STAT_CAUSE_CODE = 5
-    if STAT_CAUSE_DISC.lower()=='railroad':
+    elif STAT_CAUSE_DISC.lower()=='railroad':
         STAT_CAUSE_CODE = 6
-    if STAT_CAUSE_DISC.lower()=='arson':
+    elif STAT_CAUSE_DISC.lower()=='arson':
         STAT_CAUSE_CODE = 7
-    if STAT_CAUSE_DISC.lower()=='children':
+    elif STAT_CAUSE_DISC.lower()=='children':
         STAT_CAUSE_CODE = 8
-    if STAT_CAUSE_DISC.lower()=='misc/other':
+    elif STAT_CAUSE_DISC.lower()=='misc/other':
         STAT_CAUSE_CODE = 9
-    if STAT_CAUSE_DISC.lower()=='fireworks':
+    elif STAT_CAUSE_DISC.lower()=='fireworks':
         STAT_CAUSE_CODE = 10
-    if STAT_CAUSE_DISC.lower()=='power line':
+    elif STAT_CAUSE_DISC.lower()=='power line':
         STAT_CAUSE_CODE = 11
-    if STAT_CAUSE_DISC.lower()=='structure':
+    elif STAT_CAUSE_DISC.lower()=='structure':
         STAT_CAUSE_CODE = 12
-    if STAT_CAUSE_DISC.lower()=='missing':
+    elif STAT_CAUSE_DISC.lower()=='missing':
         STAT_CAUSE_CODE = 13
     return tt, STAT_CAUSE_CODE
 
