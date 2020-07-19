@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "987a9fcdc9600623d034f6fb9880a463",
+    "revision": "ecd091d66e86efdb124a83c27495f90a",
     "url": "/BlueSky-AI/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/BlueSky-AI/static/css/2.e9146003.chunk.css"
   },
   {
-    "revision": "43f5c8b6ac2509de45f8",
+    "revision": "26c5a2ddbe9e0afc4bad",
     "url": "/BlueSky-AI/static/css/main.986d73bc.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/BlueSky-AI/static/js/2.c3ca5081.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "43f5c8b6ac2509de45f8",
-    "url": "/BlueSky-AI/static/js/main.8ce18e98.chunk.js"
+    "revision": "26c5a2ddbe9e0afc4bad",
+    "url": "/BlueSky-AI/static/js/main.b126e250.chunk.js"
   },
   {
     "revision": "c138fcef1e48efb88521",

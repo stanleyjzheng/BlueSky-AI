@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/BlueSky-AI/precache-manifest.5eeede76b2ca8eeaeefbc851c2669ff9.js"
+  "/BlueSky-AI/precache-manifest.c5e8a1036fafb89b8c42014e3a0edde0.js"
 );
 
 self.addEventListener('message', (event) => {
