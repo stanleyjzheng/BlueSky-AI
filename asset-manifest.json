@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/BlueSky-AI/static/css/main.986d73bc.chunk.css",
+    "main.js": "/BlueSky-AI/static/js/main.8ce18e98.chunk.js",
+    "main.js.map": "/BlueSky-AI/static/js/main.8ce18e98.chunk.js.map",
+    "runtime-main.js": "/BlueSky-AI/static/js/runtime-main.48299029.js",
+    "runtime-main.js.map": "/BlueSky-AI/static/js/runtime-main.48299029.js.map",
+    "static/css/2.e9146003.chunk.css": "/BlueSky-AI/static/css/2.e9146003.chunk.css",
+    "static/js/2.c3ca5081.chunk.js": "/BlueSky-AI/static/js/2.c3ca5081.chunk.js",
+    "static/js/2.c3ca5081.chunk.js.map": "/BlueSky-AI/static/js/2.c3ca5081.chunk.js.map",
+    "index.html": "/BlueSky-AI/index.html",
+    "precache-manifest.5eeede76b2ca8eeaeefbc851c2669ff9.js": "/BlueSky-AI/precache-manifest.5eeede76b2ca8eeaeefbc851c2669ff9.js",
+    "service-worker.js": "/BlueSky-AI/service-worker.js",
+    "static/css/2.e9146003.chunk.css.map": "/BlueSky-AI/static/css/2.e9146003.chunk.css.map",
+    "static/css/main.986d73bc.chunk.css.map": "/BlueSky-AI/static/css/main.986d73bc.chunk.css.map",
+    "static/js/2.c3ca5081.chunk.js.LICENSE.txt": "/BlueSky-AI/static/js/2.c3ca5081.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/BlueSky-AI/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.48299029.js",
+    "static/css/2.e9146003.chunk.css",
+    "static/js/2.c3ca5081.chunk.js",
+    "static/css/main.986d73bc.chunk.css",
+    "static/js/main.8ce18e98.chunk.js"
+  ]
+}
